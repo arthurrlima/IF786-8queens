@@ -34,7 +34,7 @@ def checkcolisao(string):
         for chk in range(idx+1,8):
             if rainhas[idx] == rainhas[chk]+chk:
                 colisao += 1
-            elif rainhas[idx] == rainhas[chk]-chk
+            elif rainhas[idx] == rainhas[chk]-chk:
                 colisao += 1
 
     return(colisao)       
