@@ -1,18 +1,52 @@
 from random import randint
-from colections import Counter
+from random import shuffle
+import random
+import itertools
 
-def geracao_inicial():
-    """retorna uma lista de 100 pais para a geração 0, cada um sendo uma string 
-    de 24 bits em que cada posição das rainhas nas linhas é codificada por 3 bits"""
-    bitString = ""
-    for i in range(0, 24): 
-        x = str(random.randint(0, 1))
-        bitString += x
-    return [bitString for x in range(100)]
+#func geracao_zero OK
+def geracao_zero(qtd):
+    separador = ""
+    bitMap = ['000', '001', '010','011', '100','101','110','111']
+    bitList = []
+    
+    
+    for n in range(qtd):
+        random.shuffle(bitMap)
+        x = itertools.permutations(bitMap)
+        strBit = separador.join(next(x))
+        bitList.append(strBit)
+    
+    return(bitList)    
+        
 
-def recombinacao(): """aqui precisa achar uma parte pra dividir e cruzar, achei um link que mostra varias 
-                maneiras de fazer: https://www.obitko.com/tutorials/genetic-algorithms/portuguese/crossover-mutation.php"""
-    filhos []
-    for x in range(100):
-        for y in range(100):
-            if(x != y):
+def checkcolisao(string):
+    colisao = 0
+    rainhas = []
+    
+    #preenchendo lista com as posições das rainhas OK
+    for k in range(0, 21, 3):
+        rainha = int(string[k:k+3], 2)
+        rainhas.append(rainha)
+
+    #percorrendo rainhas
+    #não ta funcioando
+    for idx in range(0, 8):
+        for chk in range(idx+1,8):
+            if rainhas[idx] == rainhas[chk]+chk:
+                colisao += 1
+            elif rainhas[idx] == rainhas[chk]-chk
+                colisao += 1
+
+    return(colisao)       
+
+def fitness(list):
+    
+    for n in range(len(list)):
+        stringbit = list[n]
+        ftns = 1/(1+checkcolisao(stringbit))
+
+    return(ftns)
+
+print (fitness(geracao_zero(10)))
+
+#def recombinacao():
