@@ -60,6 +60,7 @@ def pais(list):
     paislist = []
     ftnspais = []
     ftnspaisord = []
+    mlrsfntspais = []
     pais = []
     
     #selecionando 5 pais aleatoriamente
@@ -74,9 +75,22 @@ def pais(list):
     for n in range(len(ftnspais)):
         for m in range(len(mlrsfntspais)):
             if ftnspais[n] = mlrsfntspais[m]:
-                pais[m] = paislist[n]
+                pais[n] = paislist[m]
     
     return(pais)
     #print (pais(geracao_zero(10)))
 
-#def recombinacao(pais):
+
+def recombinacao(list):
+    filhos = []
+    nmrrand = random.randrange(4, 24, 3)
+
+    for n in range(len(list)):
+        for k in range(1, len(list)):
+           filhos[n][0:nmrrand] = list[n][0:nmrrand]
+           filhos[n][nmrrand:24] = list[k][nmrrand:24]
+
+    
+    return(filhos)
+
+
