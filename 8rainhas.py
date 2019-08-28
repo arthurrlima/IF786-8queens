@@ -9,7 +9,6 @@ def geracao_zero(qtd):
     bitMap = ['000', '001', '010','011', '100','101','110','111']
     bitList = []
     
-    
     for n in range(qtd):
         random.shuffle(bitMap)
         x = itertools.permutations(bitMap)
@@ -18,35 +17,44 @@ def geracao_zero(qtd):
     
     return(bitList)    
         
-
+#recebe string de bits, cria lista de int, retorna n colisoes
 def checkcolisao(string):
     colisao = 0
     rainhas = []
     
-    #preenchendo lista com as posições das rainhas OK
+    #preenchendo lista com as posições das rainhas
     for k in range(0, 21, 3):
         rainha = int(string[k:k+3], 2)
         rainhas.append(rainha)
 
     #percorrendo rainhas
-    #não ta funcioando
-    for idx in range(0, 8):
-        for chk in range(idx+1,8):
-            if rainhas[idx] == rainhas[chk]+chk:
-                colisao += 1
-            elif rainhas[idx] == rainhas[chk]-chk:
+    #calculo de colisoes OK 
+    for idx in range(len(rainhas)):
+        aux = 0
+
+        for chk in range(idx,len(rainhas)):
+          
+            if rainhas[chk] == rainhas[idx]+aux and idx != chk:
                 colisao += 1
 
-    return(colisao)       
+            elif rainhas[chk] == rainhas[idx]-aux and idx != chk:
+                colisao += 1
 
+            aux +=1
+
+    return(colisao)      
+    
+#recebe lista de string, passa string pro calculo de colisão, retorna lista dos fitness da população
+#calculo de fitness OK
 def fitness(list):
+    ftnslist = []
     
     for n in range(len(list)):
         stringbit = list[n]
         ftns = 1/(1+checkcolisao(stringbit))
+        ftnslist.append(ftns)
 
-    return(ftns)
+    return(ftnslist)
 
-print (fitness(geracao_zero(10)))
 
 #def recombinacao():
