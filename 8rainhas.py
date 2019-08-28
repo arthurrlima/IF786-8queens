@@ -56,5 +56,27 @@ def fitness(list):
 
     return(ftnslist)
 
+def pais(list):
+    paislist = []
+    ftnspais = []
+    ftnspaisord = []
+    pais = []
+    
+    #selecionando 5 pais aleatoriamente
+    paislist = random.sample(list, 5)
+    ftnspais = fitness(paislist)
+    
+    #ordenando o fitness dos 5 pais selecionados e depois selecionando os dois melhores
+    ftnspaisord = sorted(ftnspais)
+    mlrsfntspais = fntspaisord[:2]
 
-#def recombinacao():
+    #vai varrer o array de melhores fitness e o de fitness calculado inicialmente para saber de qual pai é aquele fitness
+    for n in range(len(ftnspais)):
+        for m in range(len(mlrsfntspais)):
+            if ftnspais[n] = mlrsfntspais[m]:
+                pais[m] = paislist[n]
+    
+    return(pais)
+    #print (pais(geracao_zero(10)))
+
+#def recombinacao(pais):
