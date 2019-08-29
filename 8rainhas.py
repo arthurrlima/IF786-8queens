@@ -60,7 +60,7 @@ def pais(list):
     paislist = []
     ftnspais = []
     ftnspaisord = []
-    mlrsfntspais = []
+    mlrsftnspais = []
     pais = []
     
     #selecionando 5 pais aleatoriamente
@@ -69,28 +69,37 @@ def pais(list):
     
     #ordenando o fitness dos 5 pais selecionados e depois selecionando os dois melhores
     ftnspaisord = sorted(ftnspais)
-    mlrsfntspais = fntspaisord[:2]
+    mlrsftnspais = ftnspaisord[:2]
 
-    #vai varrer o array de melhores fitness e o de fitness calculado inicialmente para saber de qual pai é aquele fitness
+    # ta funcionando mas n ta tratando fitness iguais.
     for n in range(len(ftnspais)):
-        for m in range(len(mlrsfntspais)):
-            if ftnspais[n] = mlrsfntspais[m]:
-                pais[n] = paislist[m]
+        for m in range(len(mlrsftnspais)):
+            if ftnspais[n] == mlrsftnspais[m]:
+                pais.append(paislist[n])
     
     return(pais)
-    #print (pais(geracao_zero(10)))
 
 
 def recombinacao(list):
     filhos = []
     nmrrand = random.randrange(4, 24, 3)
+    pai = list[0]
+    mae = list[1]
+    filhos[0] = pai[:nmrrand] + mae[nmrrand:]
+    filhos[1] = mae[:nmrrand] + pai[nmrrand:]
 
-    for n in range(len(list)):
-        for k in range(1, len(list)):
-           filhos[n][0:nmrrand] = list[n][0:nmrrand]
-           filhos[n][nmrrand:24] = list[k][nmrrand:24]
+
+    #for n in range(len(list)):
+     #   if n == 0:
+      #      filhos[n][:nmrrand].append(list[n][:nmrrand])
+       #     filhos[n][nmrrand:].append(list[n+1][nmrrand:])
+        #else:
+         #   filhos[n][:nmrrand].append(list[n][:nmrrand])
+          #  filhos[n][nmrrand:].append(list[n-1][nmrrand:])
 
     
     return(filhos)
 
-
+pais = pais(geracao_zero(10))
+print (pais)
+print (recombinacao(pais))
