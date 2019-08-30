@@ -78,12 +78,11 @@ def pais(list):
 
 def recombinacao(list):
     filhos = []
-    nmrrand = random.randrange(4, 24, 3)
+    xpoint = random.randrange(3, 24, 3)
     pai = list[0]
     mae = list[1]
-    filhos[0] = pai[:nmrrand] + mae[nmrrand:]
-    filhos[1] = mae[:nmrrand] + pai[nmrrand:]
-
+    filhos[0] = pai[:xpoint] + mae[xpoint:]
+    filhos[1] = mae[:xpoint] + pai[xpoint:]
 
     #for n in range(len(list)):
      #   if n == 0:
