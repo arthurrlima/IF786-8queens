@@ -59,24 +59,18 @@ def fitness(list):
 def pais(list):
     paislist = []
     ftnspais = []
-    ftnspaisord = []
-    mlrsftnspais = []
     pais = []
+    torneio = []
+    
     
     #selecionando 5 pais aleatoriamente
     paislist = random.sample(list, 5)
     ftnspais = fitness(paislist)
     
-    #ordenando o fitness dos 5 pais selecionados e depois selecionando os dois melhores
-    ftnspaisord = sorted(ftnspais)
-    mlrsftnspais = ftnspaisord[:2]
-
-    # ta funcionando mas n ta tratando fitness iguais.
-    for n in range(len(ftnspais)):
-        for m in range(len(mlrsftnspais)):
-            if ftnspais[n] == mlrsftnspais[m]:
-                pais.append(paislist[n])
-    
+    for n in range(1,len(ftnspais)):
+        if(ftnspais[n-1] > ftnspais[n]):
+            pais.append(paislist[n-1])
+        
     return(pais)
 
 
@@ -91,7 +85,7 @@ def recombinacao(list):
 
     #for n in range(len(list)):
      #   if n == 0:
-      #      filhos[n][:nmrrand].append(list[n][:nmrrand])
+      #      filhos[n][:nmrrand] = (list[n][:nmrrand])
        #     filhos[n][nmrrand:].append(list[n+1][nmrrand:])
         #else:
          #   filhos[n][:nmrrand].append(list[n][:nmrrand])
