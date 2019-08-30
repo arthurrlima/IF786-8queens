@@ -59,23 +59,19 @@ def fitness(list):
 def pais(list):
     paislist = []
     ftnspais = []
-    ftnspaisord = []
-    mlrsftnspais = []
+    
     pais = []
     
     #selecionando 5 pais aleatoriamente
     paislist = random.sample(list, 5)
     ftnspais = fitness(paislist)
-    
-    #ordenando o fitness dos 5 pais selecionados e depois selecionando os dois melhores
-    ftnspaisord = sorted(ftnspais)
-    mlrsftnspais = ftnspaisord[:2]
 
-    # ta funcionando mas n ta tratando fitness iguais.
-    for n in range(len(ftnspais)):
-        for m in range(len(mlrsftnspais)):
-            if ftnspais[n] == mlrsftnspais[m]:
-                pais.append(paislist[n])
+    #encontro o maior da lista, passo pro pais e removo da lista
+    pais[0] = paislist[ftnspais.index(max(ftnspais))]
+    paislist[ftnspais.index(max(ftnspais))] = 0
+
+    #repito pro segundo pai
+    pais[1] = paislist[ftnspais.index(max(ftnspais))]
     
     return(pais)
 
