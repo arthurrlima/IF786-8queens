@@ -74,7 +74,7 @@ def pais(list):
     
     return(pais)
 
-
+#recombinação OK
 def recombinacao(list):
     filhos = []
     xpoint = random.randrange(3, 24, 3)
@@ -85,10 +85,12 @@ def recombinacao(list):
     
     return(filhos)
 
-pais = pais(geracao_zero(10))
+geracao = geracao_zero(10)
+print (geracao)
+print (fitness(geracao))
 print (pais)
 print (recombinacao(pais))
 
 def mutacao(list):
     mutados = []
-    
+
