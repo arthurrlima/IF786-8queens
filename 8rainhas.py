@@ -69,13 +69,11 @@ def pais(list):
     ftnspais = fitness(paislist)
 
     #encontro os dois maiores da lista e defino os pais
-    print(ftnspais.index(max(ftnspais)))
 
     pais.append(paislist[ftnspais.index(max(ftnspais))])
     ftnspais[ftnspais.index(max(ftnspais))] = 0
 
     #repito pro segundo pai
-    print(ftnspais.index(max(ftnspais)))
     pais.append(paislist[ftnspais.index(max(ftnspais))])
     return(pais)
 
@@ -90,12 +88,11 @@ def recombinacao(list):
     
     return(filhos)
 
-geracao = geracao_zero(10)
+geracao = geracao_zero(5)
 print (geracao)
 print (fitness(geracao))
-print (pais)
-print (recombinacao(pais))
+print (pais(geracao))
+print (recombinacao(pais(geracao)))
 
 def mutacao(list):
     mutados = []
-
