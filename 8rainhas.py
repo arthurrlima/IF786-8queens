@@ -2,6 +2,7 @@ from random import randint
 from random import shuffle
 import random
 import itertools
+import string
 
 #func geracao_zero OK
 def geracao_zero(qtd):
@@ -23,7 +24,7 @@ def checkcolisao(string):
     rainhas = []
     
     #preenchendo lista com as posições das rainhas
-    for k in range(0, 21, 3):
+    for k in range(0, 24, 3):
         rainha = int(string[k:k+3], 2)
         rainhas.append(rainha)
 
@@ -90,16 +91,30 @@ def recombinacao(list):
     
     return(filhos)
 
-geracao = geracao_zero(100)
-print (geracao)
-print (fitness(geracao))
-print (pais(geracao))
-print (recombinacao(pais(geracao)))
-
 def mutacao(list):
-    mutados = []
+    mutado = [] 
+    separador = ""
+    temp = []
+    x = []
+    escolhido = random.choice(list)
+    print (escolhido)
+    for n in range(0, 24, 3):
+        temp.append(escolhido[n:n+3])
 
-
+    random.shuffle(temp)
+    x = itertools.permutations(temp)
+    mutado = separador.join(next(x))
+    print(temp)
+    return mutado
+ 
+    
 def sobreviventes(list):
     ftnspop = []
     
+
+geracao = geracao_zero(5)
+#print (geracao)
+#print (fitness(geracao))
+#print (pais(geracao))
+#print (recombinacao(pais(geracao)))
+print (mutacao(geracao))
