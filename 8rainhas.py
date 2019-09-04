@@ -56,6 +56,8 @@ def fitness(list):
 
     return(ftnslist)
 
+
+#seleção de pais OK
 def pais(list):
     paislist = []
     ftnspais = []
@@ -68,35 +70,36 @@ def pais(list):
     paislist = random.sample(list, 5)
     ftnspais = fitness(paislist)
 
-    #encontro o maior da lista, passo pro pais e removo da lista
-    pais.insert(0, paislist[ftnspais.index(max(ftnspais))])
-    paislist[ftnspais.index(max(ftnspais))] = 0
+    #encontro os dois maiores da lista e defino os pais
+
+    pais.append(paislist[ftnspais.index(max(ftnspais))])
+    ftnspais[ftnspais.index(max(ftnspais))] = 0
 
     #repito pro segundo pai
-    pais.insert(1, paislist[ftnspais.index(max(ftnspais))])
-    
+    pais.append(paislist[ftnspais.index(max(ftnspais))])
     return(pais)
 
-
+#recombinação OK
 def recombinacao(list):
     filhos = []
     xpoint = random.randrange(3, 24, 3)
     pai = list[0]
     mae = list[1]
-    filhos.insert(0, pai[:xpoint] + mae[xpoint:])
-    filhos.insert(1, mae[:xpoint] + pai[xpoint:])
-
-    #for n in range(len(list)):
-     #   if n == 0:
-      #      filhos[n][:nmrrand] = (list[n][:nmrrand])
-       #     filhos[n][nmrrand:].append(list[n+1][nmrrand:])
-        #else:
-         #   filhos[n][:nmrrand].append(list[n][:nmrrand])
-          #  filhos[n][nmrrand:].append(list[n-1][nmrrand:])
-
+    filhos.append(pai[:xpoint] + mae[xpoint:])
+    filhos.append(mae[:xpoint] + pai[xpoint:])
     
     return(filhos)
 
-pais = pais(geracao_zero(10))
-print (pais)
-print (recombinacao(pais))
+geracao = geracao_zero(100)
+print (geracao)
+print (fitness(geracao))
+print (pais(geracao))
+print (recombinacao(pais(geracao)))
+
+def mutacao(list):
+    mutados = []
+
+
+def sobreviventes(list):
+    ftnspop = []
+    
