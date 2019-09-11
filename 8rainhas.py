@@ -89,7 +89,10 @@ def recombinacao(list):
     filhos.append(pai[:xpoint] + mae[xpoint:])
     filhos.append(mae[:xpoint] + pai[xpoint:])
     
-    return(filhos)
+    list.append(filhos)
+
+
+    return(list)
 
 #mutação OK
 def mutacao(list):
@@ -117,22 +120,34 @@ def mutacao(list):
         rainhaTemp = escSeparado[xnumber1]
         escSeparado[xnumber1] = escSeparado[xnumber2]
         escSeparado[xnumber2] = rainhaTemp
-
         
     mutado = separador.join(escSeparado)
-    
-    return mutado
+    list.append(mutado)
+
+    return (list)
  
-    
+#erro que não sei concertar: int() can't convert non-string with explicit base
+#tetei fazer a conversão mas sempre dá errado.
 def sobreviventes(list):
     ftnspop = fitness(list)
+    print (list)
+    print(ftnspop)
+    while(len(list) > 10):
+        for n in range(len(list)):
+            if(ftnspop[n] == min(ftnspop)):
+                del(list[n])
+                del(ftnspop[n])
+    
+    return (list)
+
          
 
 geracao = geracao_zero(10)
-print (geracao)
-print (fitness(geracao))
+#print (geracao)
+#print (fitness(geracao))
 pais = (pais(geracao))
-print (fitness(pais))
-print (pais)
+#print (fitness(pais))
+#print (pais)
 print (recombinacao(pais))
 print (mutacao(geracao))
+print (sobreviventes(recombinacao(pais)))
