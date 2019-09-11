@@ -91,30 +91,48 @@ def recombinacao(list):
     
     return(filhos)
 
+#mutação OK
 def mutacao(list):
     mutado = [] 
     separador = ""
-    temp = []
-    x = []
+    escSeparado = []
     escolhido = random.choice(list)
     print (escolhido)
     for n in range(0, 24, 3):
-        temp.append(escolhido[n:n+3])
+        escSeparado.append(escolhido[n:n+3])
 
-    random.shuffle(temp)
-    x = itertools.permutations(temp)
-    mutado = separador.join(next(x))
-    print(temp)
+    xnumber1 = random.randrange(0, 7)
+    xnumber2 = random.randrange(0, 7)
+    if(xnumber1 == xnumber2 & xnumber2 == 7):
+        xnumber2 = xnumber2-1
+        rainhaTemp = escSeparado[xnumber1]
+        escSeparado[xnumber1] = escSeparado[xnumber2]
+        escSeparado[xnumber2] = rainhaTemp
+    elif((xnumber1 == xnumber2 & xnumber2 == 0) | xnumber1 == xnumber2):
+        xnumber2 = xnumber2+1
+        rainhaTemp = escSeparado[xnumber1]
+        escSeparado[xnumber1] = escSeparado[xnumber2]
+        escSeparado[xnumber2] = rainhaTemp
+    else:
+        rainhaTemp = escSeparado[xnumber1]
+        escSeparado[xnumber1] = escSeparado[xnumber2]
+        escSeparado[xnumber2] = rainhaTemp
+
+        
+    mutado = separador.join(escSeparado)
+    
     return mutado
  
     
 def sobreviventes(list):
-    ftnspop = []
-    
+    ftnspop = fitness(list)
+         
 
-geracao = geracao_zero(5)
-#print (geracao)
-#print (fitness(geracao))
-#print (pais(geracao))
-#print (recombinacao(pais(geracao)))
+geracao = geracao_zero(10)
+print (geracao)
+print (fitness(geracao))
+pais = (pais(geracao))
+print (fitness(pais))
+print (pais)
+print (recombinacao(pais))
 print (mutacao(geracao))
