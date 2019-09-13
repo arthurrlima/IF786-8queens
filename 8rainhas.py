@@ -1,5 +1,6 @@
 from random import randint
 from random import shuffle
+import math
 import random
 import itertools
 import string
@@ -88,11 +89,8 @@ def recombinacao(list):
     mae = list[1]
     filhos.append(pai[:xpoint] + mae[xpoint:])
     filhos.append(mae[:xpoint] + pai[xpoint:])
-    
-    list.append(filhos)
 
-
-    return(list)
+    return(filhos)
 
 #mutação OK
 def mutacao(list):
@@ -100,7 +98,7 @@ def mutacao(list):
     separador = ""
     escSeparado = []
     escolhido = random.choice(list)
-    print (escolhido)
+    
     for n in range(0, 24, 3):
         escSeparado.append(escolhido[n:n+3])
 
@@ -122,6 +120,9 @@ def mutacao(list):
         escSeparado[xnumber2] = rainhaTemp
         
     mutado = separador.join(escSeparado)
+
+    del(list[list.index(escolhido)])
+    
     list.append(mutado)
 
     return (list)
@@ -138,13 +139,42 @@ def sobreviventes(list):
 
          
 
-geracao = geracao_zero(100)
-#print (geracao)
-#print (fitness(geracao))
-pais1 = (pais(geracao))
-#print (fitness(pais))
-#print (pais)
-#print (recombinacao(pais))
-print (mutacao(pais1))
-#print (sobreviventes(recombinacao(pais)))
-print(sobreviventes(geracao))
+
+
+
+#começo da execução
+population = geracao_zero(100)
+tries = 0
+
+while True:
+    tries += 1
+    lista_fitness = fitness(population)
+    fitnessmax = min(lista_fitness)
+    index_ftns = lista_fitness.index(fitnessmax)
+    bool_fit = math.isclose(fitnessmax, 0)
+
+    if(bool_fit):
+        print("encontrada solução: ", population[index_ftns])
+        print("tentativa n*: ", tries)
+        break
+    elif(tries == 10000):
+        print("limite de tentativas estourado, população não convergiu")
+        break
+    
+    selecao_pais = pais(population)
+
+    chance_recomb = randint(1, 100)
+    chance_mut = randint(1, 100)
+
+    if(chance_recomb <= 90):
+        prole = recombinacao(selecao_pais)
+
+        if(chance_mut <= 40):
+            prole = mutacao(prole)
+
+        population = population + prole
+    
+    elif(chance_mut <= 40):
+        population = mutacao(population)
+    
+    population = sobreviventes(population)
