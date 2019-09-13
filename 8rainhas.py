@@ -126,28 +126,25 @@ def mutacao(list):
 
     return (list)
  
-#erro que não sei concertar: int() can't convert non-string with explicit base
-#tetei fazer a conversão mas sempre dá errado.
+#metodo ok
 def sobreviventes(list):
     ftnspop = fitness(list)
-    print (list)
-    print(ftnspop)
-    while(len(list) > 10):
-        for n in range(len(list)):
-            if(ftnspop[n] == min(ftnspop)):
-                del(list[n])
-                del(ftnspop[n])
     
+    while(len(list) > 100):
+            del(list[ftnspop.index(min(ftnspop))])
+            del(ftnspop[ftnspop.index(min(ftnspop))])
+                 
     return (list)
 
          
 
-geracao = geracao_zero(10)
+geracao = geracao_zero(100)
 #print (geracao)
 #print (fitness(geracao))
-pais = (pais(geracao))
+pais1 = (pais(geracao))
 #print (fitness(pais))
 #print (pais)
-print (recombinacao(pais))
-print (mutacao(geracao))
-print (sobreviventes(recombinacao(pais)))
+#print (recombinacao(pais))
+print (mutacao(pais1))
+#print (sobreviventes(recombinacao(pais)))
+print(sobreviventes(geracao))
