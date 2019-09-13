@@ -159,10 +159,10 @@ tries = 0
 
 while True:
     tries += 1
-    y.append(tries)
+    x.append(tries)
     lista_fitness = fitness(population)
     fitnessmax = max(lista_fitness)
-    x.append(fitnessmax)
+    y.append(fitnessmax)
 
     index_ftns = lista_fitness.index(fitnessmax)
     bool_fit = math.isclose(fitnessmax, 1)
