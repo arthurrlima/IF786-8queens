@@ -151,7 +151,7 @@ while True:
     lista_fitness = fitness(population)
     fitnessmax = min(lista_fitness)
     index_ftns = lista_fitness.index(fitnessmax)
-    bool_fit = math.isclose(fitnessmax, 0)
+    bool_fit = math.isclose(fitnessmax, 1)
 
     if(bool_fit):
         print("encontrada solução: ", population[index_ftns])
