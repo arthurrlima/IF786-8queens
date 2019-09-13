@@ -89,7 +89,8 @@ def recombinacao(list):
     filhos.append(pai[:xpoint] + mae[xpoint:])
     filhos.append(mae[:xpoint] + pai[xpoint:])
     
-    list.append(filhos)
+    list.append(filhos[0])
+    list.append(filhos[1])
 
 
     return(list)
@@ -143,11 +144,11 @@ def sobreviventes(list):
          
 
 geracao = geracao_zero(10)
-#print (geracao)
-#print (fitness(geracao))
-pais = (pais(geracao))
-#print (fitness(pais))
-#print (pais)
-print (recombinacao(pais))
+print (geracao)
+print (fitness(geracao))
+pai = (pais(geracao))
+print (fitness(pai))
+print (pai)
+print (recombinacao(pai))
 print (mutacao(geracao))
-print (sobreviventes(recombinacao(pais)))
+#print (sobreviventes(recombinacao(pais)))
