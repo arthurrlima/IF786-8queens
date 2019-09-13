@@ -41,7 +41,9 @@ def checkcolisao(string):
 
             elif rainhas[chk] == rainhas[idx]-aux and idx != chk:
                 colisao += 1
-
+            
+            elif rainhas[chk] == rainhas[idx] and idx != chk:
+                colisao += 1
             aux +=1
 
     return(colisao)      
@@ -149,7 +151,7 @@ tries = 0
 while True:
     tries += 1
     lista_fitness = fitness(population)
-    fitnessmax = min(lista_fitness)
+    fitnessmax = max(lista_fitness)
     index_ftns = lista_fitness.index(fitnessmax)
     bool_fit = math.isclose(fitnessmax, 1)
 
