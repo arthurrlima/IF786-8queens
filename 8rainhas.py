@@ -4,6 +4,7 @@ import math
 import random
 import itertools
 import string
+import matplotlib.pyplot as plt
 
 #func geracao_zero OK
 def geracao_zero(qtd):
@@ -145,19 +146,32 @@ def sobreviventes(list):
 
 
 #começo da execução
+
+x = []
+y = []
+
+plt.xlabel('x - fitness')
+plt.ylabel('y - iterations')
+plt.title('8 Queens Evolution')
+
 population = geracao_zero(100)
 tries = 0
 
 while True:
     tries += 1
+    y.append(tries)
     lista_fitness = fitness(population)
     fitnessmax = max(lista_fitness)
+    x.append(fitnessmax)
+
     index_ftns = lista_fitness.index(fitnessmax)
     bool_fit = math.isclose(fitnessmax, 1)
 
     if(bool_fit):
         print("encontrada solução: ", population[index_ftns])
         print("tentativa n*: ", tries)
+        plt.plot(x, y)
+        plt.show()
         break
     elif(tries == 10000):
         print("limite de tentativas estourado, população não convergiu")
