@@ -1,8 +1,10 @@
 from random import randint
 from random import shuffle
+import math
 import random
 import itertools
 import string
+import matplotlib.pyplot as plt
 
 #func geracao_zero OK
 def geracao_zero(qtd):
@@ -40,7 +42,9 @@ def checkcolisao(string):
 
             elif rainhas[chk] == rainhas[idx]-aux and idx != chk:
                 colisao += 1
-
+            
+            elif rainhas[chk] == rainhas[idx] and idx != chk:
+                colisao += 1
             aux +=1
 
     return(colisao)      
@@ -92,8 +96,7 @@ def recombinacao(list):
     list.append(filhos[0])
     list.append(filhos[1])
 
-
-    return(list)
+    return(filhos)
 
 #mutação OK
 def mutacao(list):
@@ -101,7 +104,7 @@ def mutacao(list):
     separador = ""
     escSeparado = []
     escolhido = random.choice(list)
-    print (escolhido)
+    
     for n in range(0, 24, 3):
         escSeparado.append(escolhido[n:n+3])
 
@@ -123,32 +126,69 @@ def mutacao(list):
         escSeparado[xnumber2] = rainhaTemp
         
     mutado = separador.join(escSeparado)
+
+    del(list[list.index(escolhido)])
+    
     list.append(mutado)
 
     return (list)
  
-#erro que não sei concertar: int() can't convert non-string with explicit base
-#tetei fazer a conversão mas sempre dá errado.
+#metodo ok
 def sobreviventes(list):
     ftnspop = fitness(list)
-    print (list)
-    print(ftnspop)
-    while(len(list) > 10):
-        for n in range(len(list)):
-            if(ftnspop[n] == min(ftnspop)):
-                del(list[n])
-                del(ftnspop[n])
     
+    while(len(list) > 100):
+            del(list[ftnspop.index(min(ftnspop))])
+            del(ftnspop[ftnspop.index(min(ftnspop))])
+                 
     return (list)
 
-         
+#começo da execução
 
-geracao = geracao_zero(10)
-print (geracao)
-print (fitness(geracao))
-pai = (pais(geracao))
-print (fitness(pai))
-print (pai)
-print (recombinacao(pai))
-print (mutacao(geracao))
-#print (sobreviventes(recombinacao(pais)))
+x = []
+y = []
+
+plt.xlabel('x - fitness')
+plt.ylabel('y - iterations')
+plt.title('8 Queens Evolution')
+
+population = geracao_zero(100)
+tries = 0
+
+while True:
+    tries += 1
+    x.append(tries)
+    lista_fitness = fitness(population)
+    fitnessmax = max(lista_fitness)
+    y.append(fitnessmax)
+
+    index_ftns = lista_fitness.index(fitnessmax)
+    bool_fit = math.isclose(fitnessmax, 1)
+
+    if(bool_fit):
+        print("encontrada solução: ", population[index_ftns])
+        print("tentativa n*: ", tries)
+        plt.plot(x, y)
+        plt.show()
+        break
+    elif(tries == 10000):
+        print("limite de tentativas estourado, população não convergiu")
+        break
+    
+    selecao_pais = pais(population)
+
+    chance_recomb = randint(1, 100)
+    chance_mut = randint(1, 100)
+
+    if(chance_recomb <= 90):
+        prole = recombinacao(selecao_pais)
+
+        if(chance_mut <= 40):
+            prole = mutacao(prole)
+
+        population = population + prole
+    
+    elif(chance_mut <= 40):
+        population = mutacao(population)
+    
+    population = sobreviventes(population)
