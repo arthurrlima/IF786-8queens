@@ -5,6 +5,7 @@ import random
 import itertools
 import string
 import matplotlib.pyplot as plt
+import time
 
 #func geracao_zero OK
 def geracao_zero(qtd):
@@ -126,9 +127,7 @@ def mutacao(list):
         escSeparado[xnumber2] = rainhaTemp
         
     mutado = separador.join(escSeparado)
-
     del(list[list.index(escolhido)])
-    
     list.append(mutado)
 
     return (list)
@@ -154,7 +153,7 @@ plt.title('8 Queens Evolution')
 
 population = geracao_zero(100)
 tries = 0
-
+t0 = time.time()
 while True:
     tries += 1
     x.append(tries)
@@ -166,8 +165,10 @@ while True:
     bool_fit = math.isclose(fitnessmax, 1)
 
     if(bool_fit):
+        t1 = time.time()
         print("encontrada solução: ", population[index_ftns])
         print("tentativa n*: ", tries)
+        print("tempo de execução = ", t1-t)
         plt.plot(x, y)
         plt.show()
         break

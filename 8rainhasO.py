@@ -7,6 +7,7 @@ import string
 import matplotlib.pyplot as plt
 import numpy as np
 import statistics
+import time
 
 #func geracao_zero OK
 def geracao_zero(qtd):
@@ -132,10 +133,8 @@ def mutacao(list):
 
     #junta os elementos do array em um novo individuo e retorna a população deletando o escolhido
     mutado = separador.join(mutado)
-    del(list[list.index(escolhido)])
-    
+    del(list[list.index(escolhido)])    
     list.append(mutado)
-
     return (list)
  
 #metodo ok
@@ -159,7 +158,7 @@ plt.title('8 Queens Evolution')
 
 population = geracao_zero(100)
 tries = 0
-
+t =time.time()
 while True:
     tries += 1
     x.append(tries)
@@ -181,7 +180,9 @@ while True:
         plt.show()
         break
     if(math.isclose(fitnessmin, 1)):
+        t1 = time.time()
         print("População Convergiu, fitness min = ", fitnessmin)
+        print("tempo de execução = ", t1-t)
         print("Media = ", statistics.mean(lista_fitness))
         print("Desvio Padrão = ", statistics.stdev(lista_fitness))
         print(lista_fitness)
@@ -189,7 +190,7 @@ while True:
         plt.plot(x, y)
         plt.show()
         break
-    
+
     selecao_pais = pais(population)
 
     chance_recomb = randint(1, 100)
