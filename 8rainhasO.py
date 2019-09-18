@@ -175,7 +175,9 @@ while True:
         print("tentativa n*: ", tries)
         
     if(tries == 10000):
+        t1 = time.time()
         print("limite de tentativas estourado, população não convergiu")
+        print("tempo de execução = ", t1-t)
         plt.plot(x, y)
         plt.show()
         break
